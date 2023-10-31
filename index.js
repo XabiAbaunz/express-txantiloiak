@@ -20,10 +20,13 @@ app.get('/', (req, res) => {
     })
 })
 
+app.get('/testquery', (req, res) => {
+    res.send("Kaixo GET " + JSON.stringify(req.query))
+})
+
 app.get("/test", function(req, res) {
     console.log("Hau test bat da")
-
-    res.json([])
+    // this is wrong, somEthing is missing...
 })
 
 
@@ -33,7 +36,7 @@ app.get("/user/:zer/:identifikatzaile", function(req, res) {
 
 
 app.post('/jaso', (req, res) => {
-    res.send(`Kaixo ${req.body.izen} ${req.body.abizen}`)
+    res.send(`Kaixo ${req.body.izen} ${req.body.abizen} ${req.query.test}}`)
 })
 
 app.put('/', (req, res) => {
