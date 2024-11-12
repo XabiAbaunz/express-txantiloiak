@@ -2,10 +2,14 @@ const express = require('express')
 const app = express()
 const path = require("path")
 // enable POST
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded())
 
 // enable static
 app.use(express.static(path.join(__dirname, 'public')))
+
+// enable JSON
+const bodyParser = require("body-parser");
+app.use(bodyParser.json())
 
 // use templates
 app.set('view engine', 'ejs')
@@ -27,10 +31,9 @@ app.get('/testquery', (req, res) => {
     }
 })
 
-app.get("/test", function(req, res) {
-    console.log("Hau test bat da")
-    // this is wrong, something is missing...
-})
+app.get("/test", function(req, res) { 
+    res.send( req.query )   
+}) 
 
 
 app.get("/user/:zer/:identifikatzaile", function(req, res) {
@@ -39,6 +42,7 @@ app.get("/user/:zer/:identifikatzaile", function(req, res) {
 
 
 app.post('/jaso', (req, res) => {
+    console.log(req.query.proba)
     res.send(`Kaixo ${req.body.izen} ${req.body.abizen} `)
 })
 
